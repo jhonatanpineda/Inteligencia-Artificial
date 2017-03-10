@@ -30,21 +30,15 @@ public class Solved {
     public void Bfs() {
 
         List<Node> Nodes = tablero.Llenar();
-
         Queue<Node> queue = new LinkedList<>();
         Node root = Nodes.get(inicial);
-
         root.state = "Visited";
-        //Adds to end of queue
         queue.add(root);
         Load();
 
         while (!queue.isEmpty()) {
-            //removes from front of queue
             Node r = queue.poll();
-            //System.out.println("Padre ->" + r);
             r.state = "Visited";
-
             if (size == solve.length * solve.length) {
                 return;
             }
@@ -52,13 +46,9 @@ public class Solved {
                 size++;
                 solve[r.y - 1][r.x - 1] = size;
             }
-
             System.out.println("BFS -->");
-
             View();
-            //Visit child first before grandchild
             for (Node hijo : r.getAdj()) {
-                //System.out.println("hijo ->" + hijo);
                 if (hijo.getState().equals("Unvisited")) {
                     for (Node tab : Nodes) {
                         if (hijo.getx() == tab.getx() && hijo.gety() == tab.gety()) {
@@ -76,39 +66,28 @@ public class Solved {
     public void Dfs() {
 
         List<Node> Nodes = tablero.Llenar();
-
         Stack<Node> stack = new Stack();
         Node root = Nodes.get(inicial);
-
         root.state = "Visited";
-
         stack.add(root);
-
         Load();
 
         while (!stack.isEmpty()) {
-
             Node r = stack.pop();
-            //System.out.println("padre ->" + r);
-
             if (size == solve.length * solve.length) {
                 return;
             }
-            
             if (0 == (solve[r.y - 1][r.x - 1])) {
                 size++;
                 solve[r.y - 1][r.x - 1] = size;
             }
 
             System.out.println("DFS -> ");
-
             View();
-
+            
             for (Node hijo : r.getAdj()) {
-                //System.out.println("hijo ->" + hijo);
                 if ("Unvisited".equals(hijo.state)) {
                     for (Node tab : Nodes) {
-
                         if (hijo.getx() == tab.getx() && hijo.gety() == tab.gety()) {
                             stack.add(tab);
                             break;
@@ -122,42 +101,32 @@ public class Solved {
         }
 
     }
-///////////////////////////////////////////////////////////////////////////////
-
+    
     @SuppressWarnings("empty-statement")
     public void Ucs() {
 
         List<Node> Nodes = tablero.Llenar();
-
         Comparator<Node> comparator = new CostComparator();
         PriorityQueue<Node> queue = new PriorityQueue<>(1, comparator);
-
         Node root = Nodes.get(inicial);
-
         root.state = "Visited";
-        //Adds to end of queue
         queue.add(root);
         Load();
 
         while (!queue.isEmpty()) {
-            //removes from front of queue
             Node r = queue.poll();
-            //System.out.println("Padre ->" + r);
             if (size == solve.length * solve.length) {
                 return;
-            }
-            
+            }     
             if (0 == (solve[r.y - 1][r.x - 1])) {
                 size++;
                 solve[r.y - 1][r.x - 1] = size;
             }
 
             System.out.println("Ucs -->");
-
             View();
-            //Visit child first before grandchild
+            
             for (Node hijo : r.getAdj()) {
-                //System.out.println("hijo ->" + hijo);
                 if (hijo.getState().equals("Unvisited")) {
                     for (Node tab : Nodes) {
                         if (hijo.getx() == tab.getx() && hijo.gety() == tab.gety()) {
