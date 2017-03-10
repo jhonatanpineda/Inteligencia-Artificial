@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-
 public class Node {
 
     private final List<Node> adj = new ArrayList();
@@ -15,15 +14,11 @@ public class Node {
     public int totalCost;
     public int cost;
 
- 
-
     public Node(int x, int y) {
-
             totalCost = 0;
             this.x = x;
             this.y = y;
             this.state = "Unvisited";
- 
     }
 
     public String getState() {
@@ -31,7 +26,6 @@ public class Node {
     }
 
     boolean restriccion(Node adj) {
-        
         if (x + 2 == adj.getx() && y + 1 == adj.gety()) {
             return true;
         }
@@ -53,7 +47,6 @@ public class Node {
         if (x + 1 == adj.getx() && y - 2 == adj.gety()) {
             return true;
         }
-
         if (x == adj.getx() && y == adj.gety()) {
             return false;
         }
